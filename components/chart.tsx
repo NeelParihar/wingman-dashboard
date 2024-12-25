@@ -7,8 +7,7 @@ import { Group } from "@visx/group";
 import { scaleBand, scaleLinear } from "@visx/scale";
 import { Bar } from "@visx/shape";
 import { Text } from "@visx/text";
-import { TooltipWithBounds, useTooltip } from "@visx/tooltip";
-import { useChartTheme } from "./use-chart-theme";
+import { TooltipWithBounds, useTooltip, defaultStyles } from "@visx/tooltip";
 
 interface ChartProps {
   data: { name: string; value: number }[];
@@ -27,9 +26,8 @@ export function Chart({
   xAxisLabel,
   yAxisLabel,
 }: ChartProps) {
-  const theme = useChartTheme();
   const { showTooltip, hideTooltip, tooltipData, tooltipLeft, tooltipTop } =
-    useTooltip();
+    useTooltip<{ name: string; value: number }>();
 
   // Define scales
   const xScale = scaleBand<string>({
@@ -54,8 +52,8 @@ export function Chart({
             height={height - margin.top - margin.bottom}
             left={margin.left}
             top={margin.top}
-            stroke={theme.grid.stroke}
-            strokeOpacity={theme.grid.strokeOpacity}
+            // stroke={theme.grid.stroke}
+            // strokeOpacity={theme.grid.strokeOpacity}
           />
           {data.map((d) => {
             const barWidth = xScale.bandwidth();
@@ -70,7 +68,7 @@ export function Chart({
                 y={barY}
                 width={barWidth}
                 height={barHeight}
-                fill={theme.colors.primary}
+                // fill={theme.colors.primary}
                 onMouseLeave={() => hideTooltip()}
                 onMouseMove={() => {
                   const top = barY;
@@ -87,10 +85,10 @@ export function Chart({
           <AxisBottom
             top={height - margin.bottom}
             scale={xScale}
-            stroke={theme.axis.stroke}
-            tickStroke={theme.axis.stroke}
+            // stroke={theme.axis.stroke}
+            // tickStroke={theme.axis.stroke}
             tickLabelProps={{
-              fill: theme.axis.color,
+              // fill: theme.axis.color,
               fontSize: 12,
               textAnchor: "middle",
             }}
@@ -98,10 +96,10 @@ export function Chart({
           <AxisLeft
             left={margin.left}
             scale={yScale}
-            stroke={theme.axis.stroke}
-            tickStroke={theme.axis.stroke}
+            // stroke={theme.axis.stroke}
+            // tickStroke={theme.axis.stroke}
             tickLabelProps={{
-              fill: theme.axis.color,
+              // fill: theme.axis.color,
               fontSize: 12,
               textAnchor: "end",
               dy: "0.33em",
@@ -113,7 +111,7 @@ export function Chart({
               x={width / 2}
               y={height - 5}
               textAnchor="middle"
-              fill={theme.axis.color}
+              // fill={theme.axis.color}
               fontSize={12}
             >
               {xAxisLabel}
@@ -125,7 +123,7 @@ export function Chart({
               y={15}
               transform={`rotate(-90)`}
               textAnchor="middle"
-              fill={theme.axis.color}
+              // fill={theme.axis.color}
               fontSize={12}
             >
               {yAxisLabel}
@@ -134,21 +132,22 @@ export function Chart({
         </Group>
       </svg>
       {tooltipData && (
+        //@ts-expect-error this is a bug in the visx types
         <TooltipWithBounds
           key={Math.random()}
           top={tooltipTop}
           left={tooltipLeft}
           style={{
-            ...theme.tooltip.style,
+            ...defaultStyles,
             minWidth: 60,
-            backgroundColor: theme.tooltip.backgroundColor,
-            color: theme.tooltip.color,
+            // backgroundColor: theme.tooltip.backgroundColor,
+            // color: theme.tooltip.color,
           }}
         >
-          <div style={{ color: theme.tooltip.color }}>
-            <strong>{tooltipData.name}</strong>
+          <div style={{ }}>
+            <strong>{tooltipData?.name}</strong>
           </div>
-          <div>{tooltipData.value}</div>
+          <div>{tooltipData?.value}</div>
         </TooltipWithBounds>
       )}
     </div>

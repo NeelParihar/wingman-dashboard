@@ -9,10 +9,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { MetricsGrid } from "./components/metrics-grid"
-import { Sidebar } from "./components/sidebar"
-import { InsightsSection } from "./components/insights-section"
-import { OrdersSection } from "./components/orders-section"
+import { MetricsGrid } from "@/components/metrics-grid"
+import { Sidebar } from "@/components/sidebar"
+import { InsightsSection } from "@/components/insights-section"
+import { OrdersSection } from "@/components/orders-section"
 
 export default function Dashboard() {
   return (
