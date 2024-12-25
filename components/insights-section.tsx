@@ -10,7 +10,6 @@ import {
   ResponsiveContainer,
   BarChart,
   Bar,
-  Legend,
 } from "recharts";
 import { ArrowUpRight } from "lucide-react";
 
