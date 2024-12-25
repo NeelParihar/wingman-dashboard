@@ -34,8 +34,6 @@ To get started with the project, follow these steps:
 
 ```
 
-```
-
 wingman-dashboard/
 ├── app/
 │ ├── layout.js
@@ -64,4 +62,3 @@ wingman-dashboard/
 
 If you wish to contribute to the project, please fork the repository and create a pull request with your changes.
 
-```
